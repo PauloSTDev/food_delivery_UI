@@ -9,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   _buildRestaurants() {
     List<Widget> restaurantList = [];
     restaurants.forEach(
@@ -38,40 +39,42 @@ class _HomeScreenState extends State<HomeScreen> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.all(12.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        restaurant.name,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.all(12.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          restaurant.name,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 4.0),
-                      //Rating Stars()
-                      Text(
-                        restaurant.address,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: 4.0),
+                        //Rating Stars()
+                        Text(
+                          restaurant.address,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 4.0),
-                      Text(
-                        "0.2 miles away",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: 4.0),
+                        Text(
+                          "0.2 miles away",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -90,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.deepOrangeAccent,
         title: Text("Food Delivery App UI"),
         leading: IconButton(
           //Icone de perfil
