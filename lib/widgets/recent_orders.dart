@@ -87,7 +87,7 @@ class RecentOrders extends StatelessWidget {
               child: IconButton(
                 icon: Icon(Icons.add),
                 iconSize: 30.0,
-                color: Colors.white,
+                color: Colors.black,
                 onPressed: () {},
               ),
           ),
