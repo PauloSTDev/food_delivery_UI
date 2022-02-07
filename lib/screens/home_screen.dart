@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_ui/data/data.dart';
 import 'package:flutter_food_delivery_ui/models/restaurant.dart';
+import 'package:flutter_food_delivery_ui/widgets/rating_stars.dart';
 import 'package:flutter_food_delivery_ui/widgets/recent_orders.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   _buildRestaurants() {
     List<Widget> restaurantList = [];
     restaurants.forEach(
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         SizedBox(height: 4.0),
-                        //Rating Stars()
+                        RatingStars(restaurant.rating),
                         Text(
                           restaurant.address,
                           style: TextStyle(
@@ -94,10 +94,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.deepOrangeAccent,
-        title: Text("Food Delivery App UI"),
+        title: Text(
+          "Food Delivery App UI",
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
         leading: IconButton(
           //Icone de perfil
-          icon: Icon(Icons.account_circle),
+          icon: Icon(Icons.account_circle, color: Colors.black,),
           iconSize: 30.0,
           onPressed: () {},
         ),
@@ -107,8 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text(
               "Cart (${currentUser.cart.length})",
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
+                color: Colors.black,
+                fontSize: 16.0,
               ),
             ),
             onPressed: () {},

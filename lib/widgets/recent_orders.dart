@@ -35,7 +35,7 @@ class RecentOrders extends StatelessWidget {
                 //Expanded: Resolve o problema quando um texto for grande demais
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.all(12.0),
+                    margin: EdgeInsets.all(4.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
