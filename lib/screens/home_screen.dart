@@ -105,7 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.deepOrangeAccent,
         title: Text(
           "Food Delivery App UI",
-          style: TextStyle(fontSize: 18, color: Colors.black),
+          style: TextStyle(
+              fontSize: 19,
+              color: Colors.black,
+              ),
         ),
         leading: IconButton(
           //Icone de perfil
