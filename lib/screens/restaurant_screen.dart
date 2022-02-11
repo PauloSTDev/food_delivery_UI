@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_ui/models/restaurant.dart';
+import 'package:flutter_food_delivery_ui/widgets/rating_stars.dart';
 
 class RestaurantScreen extends StatefulWidget {
   final Restaurant restaurant;
@@ -18,15 +19,17 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
         children: <Widget>[
           Stack(
             children: <Widget>[
-              Image(
-                height: 220.0,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                image: AssetImage(widget.restaurant.imageUrl),
-                fit: BoxFit.cover,
+              //Imagem e animação
+              Hero(
+                tag: widget.restaurant.imageUrl,
+                child: Image(
+                  height: 220.0,
+                  width: MediaQuery.of(context).size.width,
+                  image: AssetImage(widget.restaurant.imageUrl),
+                  fit: BoxFit.cover,
+                ),
               ),
+              //Botões na imagem, voltar e favoritar
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
                 child: Row(
@@ -48,6 +51,32 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 ),
               ),
             ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      widget.restaurant.name,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      "0.2 miles away",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+                RatingStars(widget.restaurant.rating),
+              ],
+            ),
           ),
         ],
       ),
