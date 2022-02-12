@@ -55,6 +55,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,9 +76,47 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   ],
                 ),
                 RatingStars(widget.restaurant.rating),
+                SizedBox(height: 6.0),
+                Text(
+                  widget.restaurant.address,
+                  style: TextStyle(fontSize: 18.0),
+                ),
               ],
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  )
+                ),
+                onPressed: () {},
+                child: Text(
+                  "Reviews",
+                  style: TextStyle(color: Colors.black, fontSize: 20.0),
+                ),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 30.0),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    )
+                ),
+                onPressed: () {},
+                child: Text(
+                  "Contact",
+                  style: TextStyle(color: Colors.black, fontSize: 20.0),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
