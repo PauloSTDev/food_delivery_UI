@@ -17,6 +17,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
   _buildMenuItem(Food menuItem) {
     return Center(
       child: Stack(
+        alignment: Alignment.center,
         children: <Widget>[
           Container(
             height: 175.0,
@@ -38,10 +39,10 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
                 colors: [
-                  Colors.black.withOpacity(0.3),
-                  Colors.black87.withOpacity(0.3),
-                  Colors.black54.withOpacity(0.3),
-                  Colors.black38.withOpacity(0.3),
+                  Colors.white.withOpacity(0.3),
+                  Colors.white70.withOpacity(0.3),
+                  Colors.white60.withOpacity(0.3),
+                  Colors.white30.withOpacity(0.3),
                 ],
                 stops: [
                   0.1,
@@ -49,6 +50,48 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   0.7,
                   0.9,
                 ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 65.0,
+            child: Column(
+              children: <Widget>[
+                Text(
+                  menuItem.name,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+                Text(
+                  "\$${menuItem.price}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 10.0,
+            right: 10.0,
+            child: Container(
+              width: 48.0,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.add),
+                iconSize: 30.0,
+                color: Colors.black,
+                onPressed: () {},
               ),
             ),
           ),
