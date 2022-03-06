@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_ui/data/data.dart';
+import 'package:flutter_food_delivery_ui/data/firebase_storage_service.dart';
 import 'package:flutter_food_delivery_ui/models/restaurant.dart';
 import 'package:flutter_food_delivery_ui/screens/cart_screen.dart';
 import 'package:flutter_food_delivery_ui/screens/restaurant_screen.dart';
@@ -12,6 +13,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  /**
+   * Future<Widget> _getImage(BuildContext context, String imageName) async {
+    Image image;
+    await FirebaseStorageService.loadImage(context, imageName).then((value) {
+      image = Image.network(
+        value.toString(),
+        fit: BoxFit.scaleDown,
+      );
+    });
+    return image;
+
+    **/
+
   _buildRestaurants() {
     List<Widget> restaurantList = [];
     restaurants.forEach(
@@ -19,10 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
         restaurantList.add(
           GestureDetector(
             onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => RestaurantScreen(restaurant: restaurant),
-                ),
+              context,
+              MaterialPageRoute(
+                builder: (_) => RestaurantScreen(restaurant: restaurant),
+              ),
             ),
             child: Container(
               margin: EdgeInsets.symmetric(
@@ -30,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 vertical: 10.0,
               ),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.orangeAccent,
                 borderRadius: BorderRadius.circular(15.0),
                 border: Border.all(
                   width: 1.0,
@@ -110,9 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           "Food Delivery App UI",
           style: TextStyle(
-              fontSize: 19,
-              color: Colors.black,
-              ),
+            fontSize: 19,
+            color: Colors.black,
+          ),
         ),
         leading: IconButton(
           //Icone de perfil
@@ -133,7 +148,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontSize: 16.0,
               ),
             ),
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CartScreen())),
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (_) => CartScreen())),
           ),
         ],
       ),
@@ -192,6 +208,47 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               _buildRestaurants(),
+              Material(/**
+                child: FutureBuilder(
+                  future: ///_getImage(context, "images/burger.jpg"),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 10.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.orangeAccent,
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                            width: 1.0,
+                            color: Colors.grey[200],
+                          ),
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Hero(
+                              tag: snapshot.data,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    };
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width /1.2,
+                        height: MediaQuery.of(context).size.width /1.2,
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return Container();
+                  },
+                ),**/
+              ),
             ],
           ),
         ],
