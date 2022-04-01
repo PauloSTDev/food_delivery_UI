@@ -21,7 +21,13 @@ environment:
   sdk: '>=2.7.0 <3.0.0'
 
 dependencies:
-  firebase_core:
+
+  # download file from firebase
+  firebase_core: ^1.0.3
+  firebase_storage: ^8.0.3
+
+  # store file from firebase
+  path_provider: ^2.0.1
 
   flutter:
     sdk: flutter

@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_ui/screens/home_screen.dart';
 
 void main() async{
+  
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
