@@ -106,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -200,12 +201,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   future: _fbApp,
                   builder: (context, snapshot) {
                     print("Dados: "+ snapshot.hasData.toString());
-                    print(snapshot.hasError);
                     if(snapshot.hasError){
                       return Text("Something went Wrong");
                     }
                     else if (snapshot.hasData){
-                      return Center(child: Text("Conectado"));
+                      return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: Theme.of(context).primaryColor,
+                              ),
+                                onPressed: () {},
+                                child: Icon(Icons.update, color: Colors.black),
+                            ),
+                          ],
+                        );
                     }
                     else{
                       Center(

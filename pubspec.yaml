@@ -22,7 +22,7 @@ environment:
 
 dependencies:
   firebase_core:
-  firebase_database:
+
   flutter:
     sdk: flutter
 
