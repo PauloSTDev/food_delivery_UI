@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_ui/data/data.dart';
+import 'package:flutter_food_delivery_ui/data/firebase_api.dart';
+import 'package:flutter_food_delivery_ui/models/firebase_file.dart';
 import 'package:flutter_food_delivery_ui/models/restaurant.dart';
 import 'package:flutter_food_delivery_ui/screens/cart_screen.dart';
 import 'package:flutter_food_delivery_ui/screens/restaurant_screen.dart';
@@ -14,6 +16,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
+  Future<List<FirebaseFile>> futureFiles;
+
+  @override
+  void initState() {
+    super.initState();
+    futureFiles = FirebaseApi.listAll("Images/");
+  }
 
   _buildRestaurants() {
     List<Widget> restaurantList = [];
@@ -106,6 +115,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget buildFile(BuildContext context, FirebaseFile file) => ListTile(
+          leading: ClipOval(
+            child: Image.network(
+              file.url,
+              width: 52,
+              height: 53,
+              fit: BoxFit.cover,
+            ),
+          ),
+          title: Text(
+            file.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+              color: Colors.pink,
+            ),
+          ),
+        );
 
     return Scaffold(
       appBar: AppBar(
@@ -196,42 +223,68 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Material(
-                child: FutureBuilder(
-                  future: _fbApp,
-                  builder: (context, snapshot) {
-                    print("Dados: "+ snapshot.hasData.toString());
-                    if(snapshot.hasError){
-                      return Text("Something went Wrong");
-                    }
-                    else if (snapshot.hasData){
-                      return Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: Theme.of(context).primaryColor,
-                              ),
-                                onPressed: () {},
-                                child: Icon(Icons.update, color: Colors.black),
-                            ),
-                          ],
-                        );
-                    }
-                    else{
-                      Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    return Container();
-                  },
-                ),
-              ),
               _buildRestaurants(),
+              FutureBuilder<List<FirebaseFile>>(
+                  future: futureFiles,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return Center(child: CircularProgressIndicator());
+
+                      default:
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text("Some error occurred!"),
+                          );
+                        } else {
+                          final files = snapshot?.data;
+
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 12,
+                              ),
+                              Container(
+                                  height: 300,
+                                  width: 300,
+                                  child: ListView.builder(
+                                    itemCount: files.length,
+                                    itemBuilder: (context, index) {
+                                      final file = files[index];
+                                      return buildFile(context, file);
+                                    },
+                                  )),
+                            ],
+                          );
+                        }
+                    }
+                  }),
             ],
           ),
         ],
       ),
     );
   }
+
+  Widget buildHeader(int length) => ListTile(
+        tileColor: Colors.blue,
+        leading: Container(
+          width: 52,
+          height: 52,
+          child: Icon(
+            Icons.file_copy,
+            color: Colors.white,
+          ),
+        ),
+        title: Text(
+          '$length Files',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+      );
 }
