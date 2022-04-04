@@ -6,6 +6,7 @@ import 'package:flutter_food_delivery_ui/models/firebase_file.dart';
 import 'package:flutter_food_delivery_ui/models/restaurant.dart';
 import 'package:flutter_food_delivery_ui/screens/cart_screen.dart';
 import 'package:flutter_food_delivery_ui/screens/restaurant_screen.dart';
+import 'package:flutter_food_delivery_ui/widgets/build_restaurants_db.dart';
 import 'package:flutter_food_delivery_ui/widgets/rating_stars.dart';
 import 'package:flutter_food_delivery_ui/widgets/recent_orders.dart';
 
@@ -15,13 +16,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
   Future<List<FirebaseFile>> futureFiles;
 
   @override
   void initState() {
     super.initState();
-    futureFiles = FirebaseApi.listAll("Images/");
+    futureFiles = FirebaseApi.listAll("Images/restaurants/");
   }
 
   _buildRestaurants() {
@@ -223,7 +223,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              _buildRestaurants(),
+              //_buildRestaurants(),
+              BuildRestaurantsDB(),
               FutureBuilder<List<FirebaseFile>>(
                   future: futureFiles,
                   builder: (context, snapshot) {
@@ -248,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Container(
                                   height: 300,
-                                  width: 300,
+                                  width: 500,
                                   child: ListView.builder(
                                     itemCount: files.length,
                                     itemBuilder: (context, index) {
