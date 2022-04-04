@@ -223,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              //_buildRestaurants(),
+              _buildRestaurants(),
               BuildRestaurantsDB(),
               FutureBuilder<List<FirebaseFile>>(
                   future: futureFiles,

@@ -21,13 +21,71 @@ class _BuildRestaurantsDBState extends State<BuildRestaurantsDB> {
   Widget build(BuildContext context) {
     Widget buildFile(BuildContext context, FirebaseFile file) => Row(
           children: <Widget>[
-
-            ClipOval(
-              child: Image.network(
-                file.url,
-                width: 52,
-                height: 53,
-                fit: BoxFit.cover,
+            Container(
+              margin: EdgeInsets.symmetric(
+                vertical: 10.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15.0),
+                border: Border.all(
+                  width: 1.0,
+                  color: Colors.grey[200],
+                ),
+              ),
+              child: Row(
+                children: [
+                  Hero(
+                    tag: file.url,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Image(
+                        height: 150.0,
+                        width: 150.0,
+                        image: NetworkImage(
+                          file.url,
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Nome do restaurante",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 4.0),
+                          //RatingStars(restaurant.rating),
+                          Text("Ratings"),
+                          Text(
+                            "Adress",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 4.0),
+                          Text(
+                            "0.2 miles away",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
               ),
             ),
           ],
@@ -53,8 +111,8 @@ class _BuildRestaurantsDBState extends State<BuildRestaurantsDB> {
                   children: [
                     Expanded(
                         child: Container(
-                          height: 700,
-                          width: 900,
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.symmetric(
                             horizontal: 20.0,
                             vertical: 10.0,
