@@ -23,9 +23,15 @@ class _BuildRestaurantsDBState extends State<BuildRestaurantsDB> {
   Widget build(BuildContext context) {
 
     Widget buildFile(BuildContext context, FirebaseFile file) {
-      List<Widget> restaurantList = [];
-      restaurantList.add(
-        GestureDetector(
+      List restaurantList = [];
+      restaurants.forEach(
+            (Restaurant restaurant) {
+              restaurantList.add(
+                [restaurant.name, restaurant.address, restaurant.rating]
+              );
+            }
+      );
+        return GestureDetector(
           onTap: () {},
           child: Container(
             margin: EdgeInsets.symmetric(
@@ -61,7 +67,7 @@ class _BuildRestaurantsDBState extends State<BuildRestaurantsDB> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Nome do restaurante",
+                        restaurantList[0][0],
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
@@ -70,9 +76,9 @@ class _BuildRestaurantsDBState extends State<BuildRestaurantsDB> {
                       ),
                       SizedBox(height: 4.0),
                       //RatingStars(restaurant.rating),
-                      Text("Ratings"),
+                      RatingStars(restaurantList[0][2]),
                       Text(
-                        "Adress",
+                        restaurantList[0][1],
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -94,13 +100,8 @@ class _BuildRestaurantsDBState extends State<BuildRestaurantsDB> {
               ],
             ),
           ),
-        ),
-      );
-      return Column(
-        children: restaurantList,
-      );
+        );
     }
-
 
 
     return FutureBuilder<List<FirebaseFile>>(
