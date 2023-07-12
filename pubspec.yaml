@@ -23,8 +23,8 @@ environment:
 dependencies:
 
   # download file from firebase
-  firebase_core: ^1.0.3
   firebase_storage: ^8.0.3
+  firebase_core_platform_interface: 4.5.1
 
   # store file from firebase
   path_provider: ^2.0.1
